@@ -15,11 +15,10 @@ const StyledAvatar = styled(Avatar)`
 
 export default function About() {
   return (
-  <StylesProvider injectFirst>
+  
     <div>
       <Avatar />
       <StyledAvatar />
     </div>
-  </StylesProvider>
   )
 }
