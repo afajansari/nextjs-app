@@ -18,7 +18,7 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
     const [user] = useAuthState(auth);
     const [input, setInput] = useState();
     const router = useRouter();
-    const [messagesSnapshot] = useCollection(db.collection("chats").doc(router.query.id).collection("messages").orderBy("timestamp", "asc"));
+    const [messagesSnapshot] = useCollection(db.collection("chats").doc(router.query.id as string).collection("messages").orderBy("timestamp", "asc"));
     // const recipientEmail = getRecipientEmail(users, user);
     const showMessages = () => {
         if (messagesSnapshot) {
