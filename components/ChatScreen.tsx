@@ -14,7 +14,7 @@ import firebase from 'firebase';
 // import getRecipientEmail from '../utils/getRecipientEmail';
 
 
-function ChatScreen({ chat, messages }) {
+function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
     const [user] = useAuthState(auth);
     const [input, setInput] = useState();
     const router = useRouter();
