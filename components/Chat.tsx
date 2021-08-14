@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { auth, db } from '../firebase';
 import getRecipientEmail from '../utils/getRecipientEmail';
 
-function Chat({ id, users }: {id:any}) {
+function Chat({ id, users }: {id:any, users: any}) {
     const router = useRouter();
     const [user] = useAuthState(auth);
     const [recipientSnapshot] = useCollection(db.collection('users').where('email', '==', getRecipientEmail(users, user)));
