@@ -16,7 +16,7 @@ import firebase from 'firebase';
 
 function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
     const [user]:any = useAuthState(auth);
-    const [input, setInput] = useState();
+    const [input, setInput] = useState('');
     const router = useRouter();
     const [messagesSnapshot] = useCollection(db.collection("chats").doc(router.query.id as string).collection("messages").orderBy("timestamp", "asc"));
     // const recipientEmail = getRecipientEmail(users, user);
