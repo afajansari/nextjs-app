@@ -15,7 +15,7 @@ import firebase from 'firebase';
 
 
 function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
-    const [user] = useAuthState(auth);
+    const [user]:any = useAuthState(auth);
     const [input, setInput] = useState();
     const router = useRouter();
     const [messagesSnapshot] = useCollection(db.collection("chats").doc(router.query.id as string).collection("messages").orderBy("timestamp", "asc"));
@@ -44,7 +44,7 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
     const sendMessage = (e:any) => {
         e.preventDefault();
         // Update the last seen...
-        db.collection("users").doc(user.uid as unknown as undefined).set(
+        db.collection("users").doc(user.uid).set(
             {
                 lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
             },
@@ -58,7 +58,7 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
             user: user.email,
             photoURL: user.photoURL,
         });
-        setInput('');
+        setInput<String>('');
     }
     return (
         <Container>
