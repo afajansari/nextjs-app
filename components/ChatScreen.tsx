@@ -87,7 +87,7 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
                     <InsertEmoticon />
                 </IconButton>
                 <Input value={input} onChange={e => setInput(e.target.value)} />
-                <button hidden disable= {!input} type="submit" onClick={sendMessage}> Send Message</button>
+                <button hidden disabled= {!input} type="submit" onClick={sendMessage}> Send Message</button>
                 <IconButton>
                     <MicIcon />
                 </IconButton>
