@@ -15,7 +15,7 @@ import Chat from "./Chat";
 
 function Sidebar() {
   // const UserAvatar = styled(Avatar)``;
-  const [user] = useAuthState(auth);
+  const [user]:any = useAuthState(auth);
   const userChatRef = db.collection("chats").where("users", "array-contains", user.email);
   const [chatsSnapshot] = useCollection(userChatRef);
   const createChat = () => {
@@ -28,9 +28,9 @@ function Sidebar() {
       });
     }
   };
-  const chatAlreadyExists = (recipientEmail) => 
+  const chatAlreadyExists = (recipientEmail: string) => 
     !!chatsSnapshot?.docs.find(
-        (chat) => chat.data().users.find((user) => user === recipientEmail)?.length > 0
+        (chat) => chat.data().users.find((user: string) => user === recipientEmail)?.length > 0
     );
   return (
     <div>
