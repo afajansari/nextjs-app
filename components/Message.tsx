@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-function Message({ user, message }) {
+function Message({ user, message }: {user:any, message: any}) {
     return (
         <Container>
             <p>{message.message}</p>
