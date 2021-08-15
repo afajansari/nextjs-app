@@ -58,7 +58,7 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
             user: user.email,
             photoURL: user.photoURL,
         });
-        setInput<String>('');
+        setInput('');
     }
     return (
         <Container>
