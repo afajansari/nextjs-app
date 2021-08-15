@@ -32,7 +32,7 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
                     }} />
             ));
         } else {
-            return JSON.parse(messages).map(message => (
+            return JSON.parse(messages).map( (message:any) => (
                 <Message
                     key={message.id}
                     user={message.user}
@@ -41,10 +41,10 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
         }
     };
 
-    const sendMessage = (e) => {
+    const sendMessage = (e:any) => {
         e.preventDefault();
         // Update the last seen...
-        db.collection("users").doc(user.uid).set(
+        db.collection("users").doc(user.uid as string).set(
             {
                 lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
             },
@@ -52,13 +52,13 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
                 merge: true
             }
         );
-        db.collection("chats").doc(router.query.id).collection("messages").add({
+        db.collection("chats").doc(router.query.id as string).collection("messages").add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             message: input,
             user: user.email,
             photoURL: user.photoURL,
         });
-        setInput<String>('');
+        setInput('');
     }
     return (
         <Container>
