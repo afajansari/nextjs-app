@@ -10,8 +10,9 @@ import getRecipientEmail from '../utils/getRecipientEmail';
 function Chat({ id, users }: {id:any, users: any}) {
     const router = useRouter();
     const [user] = useAuthState(auth);
-    const [recipientSnapshot] = useCollection(db.collection('users').where('email', '==', getRecipientEmail(users, user)));
+    const [recipientSnapshot] = useCollection(db.collection('user').where('email', '==', getRecipientEmail(users, user)));
     const recipient = recipientSnapshot?.docs[0]?.data();
+    // console.log(recipient);
     const recipientEmail = getRecipientEmail(users, user);
     const enterChat = () => {
         router.push(`/chat/${id}`);
