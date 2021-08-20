@@ -9,7 +9,7 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import Message from './Message';
 import { InsertEmoticon } from '@material-ui/icons';
 import MicIcon from '@material-ui/icons/Mic'
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import firebase from 'firebase';
 import TimeAgo from 'timeago-react'
 import getRecipientEmail from '../utils/getRecipientEmail';
@@ -19,6 +19,7 @@ import getRecipientEmail from '../utils/getRecipientEmail';
 function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
     const [user]:any = useAuthState(auth);
     const [input, setInput] = useState('');
+    const endOfMessageRef = useRef(null)
     const router = useRouter();
     const [messagesSnapshot] = useCollection(db.collection("chats").doc(router.query.id as string).collection("messages").orderBy("timestamp", "asc"));
     const [recipientSnapshot] = useCollection(db.collection("user").where("email", "==", getRecipientEmail(chat.users, user)));
@@ -44,7 +45,13 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
             ));
         }
     };
-
+    const scrollToBottom = () => {
+        endOfMessageRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        })
+    }
+ 
     const sendMessage = (e: any) => {
         e.preventDefault();
         // Update the last seen...
@@ -63,6 +70,7 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
             photoURL: user.photoURL,
         });
         setInput('');
+        scrollToBottom();
     };
     const recipient = recipientSnapshot?.docs?.[0].data();
     // console.log(recipient);
@@ -104,7 +112,7 @@ function ChatScreen({ chat, messages }: {chat:any, messages:any}) {
             <MessageContainer>
                 {/* show messages */}
                 {showMessages()}
-                <EndOfMessage />
+                <EndOfMessage ref={ endOfMessageRef}/>
             </MessageContainer>
             <InputContainer>
                 <IconButton>
@@ -146,7 +154,8 @@ const HeaderInformation = styled.div`
     }
 `;
 const HeaderIcons = styled.div``;
-const EndOfMessage = styled.div``;
+const EndOfMessage = styled.div`
+margin-bottom: 50px;`;
 const MessageContainer = styled.div`
     padding: 30px;
     background-color: #e5ded8;

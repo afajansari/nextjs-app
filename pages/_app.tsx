@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import 'tailwindcss/tailwind.css'
 import type { AppProps } from 'next/app';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
